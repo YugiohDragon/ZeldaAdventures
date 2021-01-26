@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ZeldaAdventures.Maps.House
 {
-    class Bed : MapObjectd
+    class Bed : MapObject
     {
         SpriteFont _font;
 

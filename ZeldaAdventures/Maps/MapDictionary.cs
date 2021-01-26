@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ZeldaAdventures.Maps.Beach;
 using ZeldaAdventures.Maps.House;
 
 namespace ZeldaAdventures.Maps
@@ -11,12 +12,13 @@ namespace ZeldaAdventures.Maps
         public static HouseMap HouseMap = new HouseMap();
         public static OutsideHouse OutsideHouse = new OutsideHouse();
         public static HillMap HillMap = new HillMap();
-
+        public static BeachMap BeachMap = new BeachMap();
         public static void LoadContent(ContentManager content)
         {
             HouseMap.LoadContent(content);
             OutsideHouse.LoadContent(content);
             HillMap.LoadContent(content);
+            BeachMap.LoadContent(content);
         }
     }
 }
