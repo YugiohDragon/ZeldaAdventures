@@ -46,13 +46,11 @@ namespace ZeldaAdventures.Controls
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
             Game1.State = GameState.Paused;
             spriteBatch.Draw(SharedContent.Blank, new Rectangle(_x, _y, _width, _height), Color.Red);
             spriteBatch.DrawString(SharedContent.Font, _prompt, new Vector2(_x + 20, _y + 10), Color.White);
             _button1.Draw(spriteBatch);
             _button2.Draw(spriteBatch);
-            spriteBatch.End();
         }
     }
 }

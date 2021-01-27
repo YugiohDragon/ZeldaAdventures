@@ -123,14 +123,12 @@ namespace ZeldaAdventures
 
             _spriteBatch.Begin();
             _map.Draw(gameTime, _spriteBatch, _graphics);
-            _spriteBatch.Draw(_link, _linkRectangle,  Color.White);
-            _spriteBatch.End();
-
             foreach (var mapObject in _map.Objects)
             {
                 mapObject.Draw(gameTime, _spriteBatch);
             }
-
+            _spriteBatch.Draw(_link, _linkRectangle,  Color.White);
+            _spriteBatch.End();
             base.Draw(gameTime);
         }
     }

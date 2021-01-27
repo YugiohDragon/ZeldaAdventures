@@ -92,10 +92,8 @@ namespace ZeldaAdventures.Maps.House
 
             if(sleeping)
             {
-                spriteBatch.Begin();
                 spriteBatch.Draw(SharedContent.Blank, new Rectangle(0, 0, 800, 480),
                     color: new Color(0, 0, 0, MathHelper.Clamp(mAlphaValue, 0, 255)));
-                spriteBatch.End();
             }
         }
     }
