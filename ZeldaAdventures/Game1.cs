@@ -2,12 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Linq;
+using ZeldaAdventures.Controls;
 using ZeldaAdventures.Maps;
 
 namespace ZeldaAdventures
 {
     public class Game1 : Game
     {
+        public static GameState State = GameState.Running;
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Texture2D _link;
@@ -15,7 +18,6 @@ namespace ZeldaAdventures
         private Vector2 _linkPosition = new Vector2(0, 0);
         private float _linkSpeed = 5;
         private bool _doorReady = true;
-        private Rectangle _previousDoor;
 
         private Rectangle _linkRectangle
         {
@@ -46,25 +48,30 @@ namespace ZeldaAdventures
             _link = Content.Load<Texture2D>("Link");
             MapDictionary.LoadContent(Content);
             _map = MapDictionary.HouseMap;
+            SharedContent.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            var keyboardState = Keyboard.GetState();
 
-            if (keyboardState.IsKeyDown(Keys.D))
-                _linkPosition.X += _linkSpeed;
+            if (State == GameState.Running)
+            {
+                var keyboardState = Keyboard.GetState();
 
-            if(keyboardState.IsKeyDown(Keys.A))
-                _linkPosition.X -= _linkSpeed;
+                if (keyboardState.IsKeyDown(Keys.D))
+                    _linkPosition.X += _linkSpeed;
 
-            if (keyboardState.IsKeyDown(Keys.S))
-                _linkPosition.Y += _linkSpeed;
+                if (keyboardState.IsKeyDown(Keys.A))
+                    _linkPosition.X -= _linkSpeed;
 
-            if (keyboardState.IsKeyDown(Keys.W))
-                _linkPosition.Y -= _linkSpeed;
+                if (keyboardState.IsKeyDown(Keys.S))
+                    _linkPosition.Y += _linkSpeed;
+
+                if (keyboardState.IsKeyDown(Keys.W))
+                    _linkPosition.Y -= _linkSpeed;
+            }
 
             if (_linkPosition.Y + _link.Height > _graphics.PreferredBackBufferHeight)
                 _linkPosition.Y = _graphics.PreferredBackBufferHeight - _link.Height;
