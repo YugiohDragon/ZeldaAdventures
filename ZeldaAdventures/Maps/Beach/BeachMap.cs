@@ -27,6 +27,8 @@ namespace ZeldaAdventures.Maps.Beach
         public override void SetupMapObjects()
         {
             Objects.Add(new Sword(new Rectangle(20, 150, 51, 75)));
+            Objects.Add(new Water(new Rectangle(0, 0, 150, 75)));
+            Objects.Add(new Water(new Rectangle(0, 227, 200, 500)));
         }
     }
 }

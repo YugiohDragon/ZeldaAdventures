@@ -10,7 +10,7 @@ namespace ZeldaAdventures.Maps
     public class MapObject
     {
         public bool LinkCollided { get; private set; } = false;
-
+        public bool IsWalkable { get; set; } = true;
         public Rectangle Location;
 
         public MapObject(Rectangle location)

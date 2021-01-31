@@ -13,6 +13,7 @@ namespace ZeldaAdventures.Maps.Beach
 
         public Sword(Rectangle location) : base(location)
         {
+            
         }
 
         public override void LoadContent(ContentManager content)

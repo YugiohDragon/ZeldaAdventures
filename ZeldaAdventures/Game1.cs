@@ -55,6 +55,9 @@ namespace ZeldaAdventures
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            
+            var previousX = _linkPosition.X;
+            var previousY = _linkPosition.Y;
 
             if (State == GameState.Running)
             {
@@ -111,6 +114,11 @@ namespace ZeldaAdventures
                 if (mapObject.Location.Intersects(_linkRectangle))
                 {
                     mapObject.OnCollision();
+                    if(!mapObject.IsWalkable)
+                    {
+                        _linkPosition.X = previousX;
+                        _linkPosition.Y = previousY;
+                    }
                 }
             }
 
@@ -123,11 +131,9 @@ namespace ZeldaAdventures
 
             _spriteBatch.Begin();
             _map.Draw(gameTime, _spriteBatch, _graphics);
-            foreach (var mapObject in _map.Objects)
-            {
-                mapObject.Draw(gameTime, _spriteBatch);
-            }
             _spriteBatch.Draw(_link, _linkRectangle,  Color.White);
+            foreach (var mapObject in _map.Objects)
+                mapObject.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
