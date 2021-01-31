@@ -12,6 +12,7 @@ namespace ZeldaAdventures.Maps
         public bool LinkCollided { get; private set; } = false;
 
         public Rectangle Location;
+
         public MapObject(Rectangle location)
         {
             Location = location;
