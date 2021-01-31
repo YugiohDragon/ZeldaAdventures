@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace ZeldaAdventures.Maps
+
 {
     public class HillMap : Map
     {
@@ -25,7 +26,7 @@ namespace ZeldaAdventures.Maps
             Doors.Add(new Door
             {
                 DestinationMap = MapDictionary.BeachMap,
-                Location = new Rectangle(0, 470, 800, 10),
+                Location = new Rectangle(350, 470, 100, 10),
                 DestinationPosition = new Vector2(400, 0)
             });
         }

@@ -15,7 +15,7 @@ namespace ZeldaAdventures
         private SpriteBatch _spriteBatch;
         private Texture2D _link;
         private Map _map;
-        private Vector2 _linkPosition = new Vector2(0, 0);
+        private Vector2 _linkPosition = new Vector2(300, 300);
         private float _linkSpeed = 5;
         private bool _doorReady = true;
 

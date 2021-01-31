@@ -17,9 +17,9 @@ namespace ZeldaAdventures.Maps.Beach
         {
             Doors.Add(new Door
             {
-                Location = new Rectangle(0, 0, 800, 10),
+                Location = new Rectangle(350, 0, 100, 10),
                 DestinationMap = MapDictionary.HillMap,
-                DestinationPosition = new Vector2(400, 480)
+                DestinationPosition = new Vector2(300, 480)
             });
 
         }
