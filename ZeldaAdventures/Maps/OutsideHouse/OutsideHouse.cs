@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,8 +17,10 @@ namespace ZeldaAdventures.Maps.OutsideHouse
 
         public override string Id => "OutsideHouse";
 
-        public override void SetupDoors()
+        public override void Setup(ContentManager content)
         {
+            Music = content.Load<Song>("field");
+
             Doors.Add(new Door
             {
                 DestinationMap = MapDictionary.HouseMap,
@@ -31,12 +34,8 @@ namespace ZeldaAdventures.Maps.OutsideHouse
                 Location = new Rectangle(0, 470, 800, 10),
                 DestinationPosition = new Vector2(400, 0)
             });
-        }
 
-        public override void SetupMapObjects()
-        {
             Objects.Add(new DungeonGuy(new Rectangle(20, 150, 271, 287)));
-            
         }
     }
 }

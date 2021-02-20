@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -24,6 +25,7 @@ namespace ZeldaAdventures
         private TimeSpan? _lastTimeSaved = null;
         private int _saveDelayMs = 1000;
         private WorldMap _worldMap = new WorldMap();
+        private Song _music;
 
         private Rectangle _linkRectangle
         {
@@ -73,6 +75,20 @@ namespace ZeldaAdventures
             
             var previousX = _linkPosition.X;
             var previousY = _linkPosition.Y;
+
+            if(_music != _map.Music)
+            {
+                if (_map.Music != null)
+                {
+                    _music = _map.Music;
+                    MediaPlayer.Play(_music);
+                }
+                else
+                {
+                    _music = null;
+                    MediaPlayer.Stop();
+                }
+            }
 
             if (State == GameState.Running)
             {

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -15,8 +17,10 @@ namespace ZeldaAdventures.Maps.Beach
 
         public override string Id => "BeachMap";
 
-        public override void SetupDoors()
+        public override void Setup(ContentManager content)
         {
+            Music = content.Load<Song>("field");
+
             Doors.Add(new Door
             {
                 Location = new Rectangle(350, 0, 100, 10),
@@ -24,10 +28,6 @@ namespace ZeldaAdventures.Maps.Beach
                 DestinationPosition = new Vector2(300, 480)
             });
 
-        }
-
-        public override void SetupMapObjects()
-        {
             Objects.Add(new Sword(new Rectangle(20, 150, 51, 75)));
             Objects.Add(new Water(new Rectangle(0, 0, 150, 75)));
             Objects.Add(new Water(new Rectangle(0, 227, 200, 500)));

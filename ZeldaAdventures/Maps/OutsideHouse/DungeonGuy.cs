@@ -11,7 +11,6 @@ namespace ZeldaAdventures.Maps.OutsideHouse
     public class DungeonGuy : MapObject
     {
         public Prompt _prompt;
-        bool promptReady = true;
         private Texture2D _texture;
 
         public DungeonGuy(Rectangle location) : base(location)

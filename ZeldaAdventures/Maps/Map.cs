@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,9 +16,9 @@ namespace ZeldaAdventures
         public List<Door> Doors = new List<Door>();
         public List<MapObject> Objects = new List<MapObject>();
         public string _textureName;
+        public Song Music;
 
-        public abstract void SetupDoors();
-        public abstract void SetupMapObjects();
+        public abstract void Setup(ContentManager content);
         public abstract string Id { get; }
 
         public Map(string textureName)
@@ -28,8 +29,7 @@ namespace ZeldaAdventures
         public void LoadContent(ContentManager content)
         {
             _texture = content.Load<Texture2D>(_textureName);
-            SetupDoors();
-            SetupMapObjects();
+            Setup(content);
             foreach (var mapObject in Objects)
                 mapObject.LoadContent(content);
         }

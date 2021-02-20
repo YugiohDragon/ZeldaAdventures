@@ -73,6 +73,18 @@
 /processorParam:TextureFormat=Color
 /build:blank.png
 
+#begin field.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:field.ogg
+
+#begin house.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:house.ogg
+
 #begin link.png
 /importer:TextureImporter
 /processor:TextureProcessor
