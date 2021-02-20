@@ -13,6 +13,7 @@ namespace ZeldaAdventures.Maps.House
            
         }
 
+        public override string Id => "HouseMap";
         public override void SetupDoors()
         {
             Doors.Add(new Door

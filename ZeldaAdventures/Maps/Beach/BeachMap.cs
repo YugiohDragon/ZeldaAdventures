@@ -13,6 +13,8 @@ namespace ZeldaAdventures.Maps.Beach
 
         }
 
+        public override string Id => "BeachMap";
+
         public override void SetupDoors()
         {
             Doors.Add(new Door
@@ -32,3 +34,4 @@ namespace ZeldaAdventures.Maps.Beach
         }
     }
 }
+    

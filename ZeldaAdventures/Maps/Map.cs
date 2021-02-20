@@ -18,6 +18,7 @@ namespace ZeldaAdventures
 
         public abstract void SetupDoors();
         public abstract void SetupMapObjects();
+        public abstract string Id { get; }
 
         public Map(string textureName)
         {

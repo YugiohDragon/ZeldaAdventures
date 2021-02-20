@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 using System.Linq;
 using ZeldaAdventures.Controls;
 using ZeldaAdventures.Maps;
@@ -18,6 +21,9 @@ namespace ZeldaAdventures
         private Vector2 _linkPosition = new Vector2(300, 300);
         private float _linkSpeed = 5;
         private bool _doorReady = true;
+        private TimeSpan? _lastTimeSaved = null;
+        private int _saveDelayMs = 1000;
+        private WorldMap _worldMap = new WorldMap();
 
         private Rectangle _linkRectangle
         {
@@ -49,12 +55,21 @@ namespace ZeldaAdventures
             MapDictionary.LoadContent(Content);
             _map = MapDictionary.HouseMap;
             SharedContent.LoadContent(Content);
+            _worldMap.LoadContent(Content);
+            LoadGame();
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if(_lastTimeSaved == null
+                || _lastTimeSaved.Value.Add(TimeSpan.FromMilliseconds(_saveDelayMs)) < gameTime.TotalGameTime)
+            {
+                _lastTimeSaved = gameTime.ElapsedGameTime;
+                SaveGame();
+            }
             
             var previousX = _linkPosition.X;
             var previousY = _linkPosition.Y;
@@ -63,17 +78,23 @@ namespace ZeldaAdventures
             {
                 var keyboardState = Keyboard.GetState();
 
-                if (keyboardState.IsKeyDown(Keys.D))
-                    _linkPosition.X += _linkSpeed;
+                if (!_worldMap.MapOpen)
+                {
+                    if (keyboardState.IsKeyDown(Keys.D))
+                        _linkPosition.X += _linkSpeed;
 
-                if (keyboardState.IsKeyDown(Keys.A))
-                    _linkPosition.X -= _linkSpeed;
+                    if (keyboardState.IsKeyDown(Keys.A))
+                        _linkPosition.X -= _linkSpeed;
 
-                if (keyboardState.IsKeyDown(Keys.S))
-                    _linkPosition.Y += _linkSpeed;
+                    if (keyboardState.IsKeyDown(Keys.S))
+                        _linkPosition.Y += _linkSpeed;
 
-                if (keyboardState.IsKeyDown(Keys.W))
-                    _linkPosition.Y -= _linkSpeed;
+                    if (keyboardState.IsKeyDown(Keys.W))
+                        _linkPosition.Y -= _linkSpeed;
+                }
+
+                _worldMap.Update(gameTime, keyboardState);
+
             }
 
             if (_linkPosition.Y + _link.Height > _graphics.PreferredBackBufferHeight)
@@ -134,8 +155,34 @@ namespace ZeldaAdventures
             _spriteBatch.Draw(_link, _linkRectangle,  Color.White);
             foreach (var mapObject in _map.Objects)
                 mapObject.Draw(gameTime, _spriteBatch);
+            _worldMap.Draw(gameTime, _spriteBatch, _graphics);
             _spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void SaveGame()
+        {
+            var savefile = new SaveFile()
+            {
+                MapId = _map.Id,
+                CurrentState = State,
+                LinkX = _linkPosition.X,
+                LinkY = _linkPosition.Y
+            };
+
+            File.WriteAllText("game.txt", JsonConvert.SerializeObject(savefile));
+        }
+
+        private void LoadGame()
+        {
+            if(File.Exists("game.txt"))
+            {
+                var savefile = JsonConvert.DeserializeObject<SaveFile>(File.ReadAllText("game.txt"));
+                _map = MapDictionary.GetMapById(savefile.MapId);
+                _linkPosition.X = savefile.LinkX;
+                _linkPosition.Y = savefile.LinkY;
+                State = savefile.CurrentState;
+            }
         }
     }
 }

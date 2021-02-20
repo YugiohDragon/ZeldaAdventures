@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ZeldaAdventures.Maps.OutsideHouse;
 
-namespace ZeldaAdventures.Maps
+namespace ZeldaAdventures.Maps.OutsideHouse
 {
     public class OutsideHouse : Map
     {
@@ -12,6 +13,8 @@ namespace ZeldaAdventures.Maps
         {
           
         }
+
+        public override string Id => "OutsideHouse";
 
         public override void SetupDoors()
         {
@@ -32,6 +35,7 @@ namespace ZeldaAdventures.Maps
 
         public override void SetupMapObjects()
         {
+            Objects.Add(new DungeonGuy(new Rectangle(20, 150, 271, 287)));
             
         }
     }
