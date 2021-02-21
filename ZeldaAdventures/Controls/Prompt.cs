@@ -38,8 +38,9 @@ namespace ZeldaAdventures.Controls
             _button2 = new Button(button2, new Rectangle(_x + _width - 120, _y + 50, 100, 40), Color.Blue, Color.Yellow, onButton2Clicked);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Game game)
         {
+            game.IsMouseVisible = true;
             _button1.Update(gameTime);
             _button2.Update(gameTime);
         }

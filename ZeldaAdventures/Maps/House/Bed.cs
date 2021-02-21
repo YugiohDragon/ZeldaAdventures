@@ -35,9 +35,10 @@ namespace ZeldaAdventures.Maps.House
             base.LoadContent(content);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Game game)
         {
-            _prompt.Update(gameTime);
+            if(LinkCollided)
+                _prompt.Update(gameTime, game);
 
             if (sleeping)
             {
@@ -73,7 +74,7 @@ namespace ZeldaAdventures.Maps.House
             }
 
 
-            base.Update(gameTime);
+            base.Update(gameTime, game);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

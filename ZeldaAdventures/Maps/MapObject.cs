@@ -28,7 +28,7 @@ namespace ZeldaAdventures.Maps
             LinkCollided = true;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, Game game)
         {
             LinkCollided = false;
         }

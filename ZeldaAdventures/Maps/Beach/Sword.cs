@@ -27,9 +27,9 @@ namespace ZeldaAdventures.Maps.Beach
             base.OnCollision();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Game game)
         {
-            base.Update(gameTime);
+            base.Update(gameTime, game);
         }
         
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -38,8 +38,10 @@ namespace ZeldaAdventures
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.IsFullScreen = true;
+
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            IsMouseVisible = false;
         }
 
         protected override void Initialize()
@@ -49,6 +51,7 @@ namespace ZeldaAdventures
             base.Initialize();
         }
 
+ 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -65,6 +68,8 @@ namespace ZeldaAdventures
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            IsMouseVisible = false;
 
             if(_lastTimeSaved == null
                 || _lastTimeSaved.Value.Add(TimeSpan.FromMilliseconds(_saveDelayMs)) < gameTime.TotalGameTime)
@@ -147,7 +152,7 @@ namespace ZeldaAdventures
 
             foreach (var mapObject in _map.Objects)
             {
-                mapObject.Update(gameTime);
+                mapObject.Update(gameTime, this);
                 if (mapObject.Location.Intersects(_linkRectangle))
                 {
                     mapObject.OnCollision();
