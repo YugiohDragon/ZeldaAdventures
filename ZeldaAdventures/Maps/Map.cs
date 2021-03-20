@@ -2,9 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using ZeldaAdventures.Maps;
 
 namespace ZeldaAdventures

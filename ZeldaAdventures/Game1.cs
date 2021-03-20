@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Linq;
 using ZeldaAdventures.Controls;
+using ZeldaAdventures.Items;
 using ZeldaAdventures.Maps;
 
 namespace ZeldaAdventures
@@ -26,6 +27,7 @@ namespace ZeldaAdventures
         private int _saveDelayMs = 1000;
         private WorldMap _worldMap = new WorldMap();
         private Song _music;
+        private Inventory _inventory = new Inventory();
 
         private Rectangle _linkRectangle
         {
@@ -38,7 +40,7 @@ namespace ZeldaAdventures
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
-            _graphics.IsFullScreen = true;
+            // _graphics.IsFullScreen = true;
 
             Content.RootDirectory = "Content";
             IsMouseVisible = false;
@@ -61,6 +63,7 @@ namespace ZeldaAdventures
             _map = MapDictionary.HouseMap;
             SharedContent.LoadContent(Content);
             _worldMap.LoadContent(Content);
+            _inventory.LoadContent(Content);
             LoadGame();
         }
 
@@ -115,7 +118,7 @@ namespace ZeldaAdventures
                 }
 
                 _worldMap.Update(gameTime, keyboardState);
-
+                _inventory.Update(gameTime, keyboardState);
             }
 
             if (_linkPosition.Y + _link.Height > _graphics.PreferredBackBufferHeight)
@@ -177,6 +180,7 @@ namespace ZeldaAdventures
             foreach (var mapObject in _map.Objects)
                 mapObject.Draw(gameTime, _spriteBatch);
             _worldMap.Draw(gameTime, _spriteBatch, _graphics);
+            _inventory.Draw(gameTime, _spriteBatch, _graphics);
             _spriteBatch.End();
             base.Draw(gameTime);
         }
