@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZeldaAdventures.Items
 {
-    public class DekuMask : Item
-    {
-    }
+    //public class DekuMask : Item
+    //{
+    //}
 }

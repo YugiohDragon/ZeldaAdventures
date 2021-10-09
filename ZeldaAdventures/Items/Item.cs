@@ -23,7 +23,7 @@ namespace ZeldaAdventures.Items
 
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch, GraphicsDeviceManager graphics)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
 
         }
